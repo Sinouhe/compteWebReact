@@ -1,28 +1,63 @@
 import User_DAO from './User_DAO';
+import bcrypt from 'bcrypt-nodejs';
+import jwt from 'jwt-simple';
+import config from '../config'
+
+
 
 class User extends User_DAO {
     
-    id = null;
-    nom = '';
-    email = '';
+    #passwordSaltRound = 10;
 
-    constructor({nom, email}) {
+    id = undefined;
+
+    constructor({nom, email, password} = {}) {
         super();
-        this.nom = nom;
-        this.email = email;
+        nom ? this.nom = nom : this.nom = '';
+        email ? this.email = email : this.email = '';
+        password ? this.password = password : this.password = '';
     }
 
-    static _getUserByEmail = (dataBase, email, result) => {
-        return this._getUserByEmail_DAO(dataBase, email, result);
+    _getUserByEmail_Promise = (email) => {
+        return this._getUserByEmail_DAO_Promise(email);
     }
 
-    static _getUserByEmail_Promise = (dataBase, email) => {
-        return this._getUserByEmail_DAO_Promise(dataBase, email);
+    saveUser_Promise = () => {
+        this.password = this.cryptMdpSync(this.password);
+        return this.saveUser_DAO_Promise();
     }
 
-    saveUser_Promise = (dataBase) => {
-        return this.saveUser_DAO_Promise(dataBase);
+    cryptMdpSync = (password) => {     
+        const salt = bcrypt.genSaltSync(this.passwordSaltRound);
+        return bcrypt.hashSync(password, salt);
     }
+
+    userFindById_Promise = (id) => {
+        return this.userFindById_DAO_Promise(id)
+    }
+
+    static getTokenForUserId = (id) => {
+        const timeStamp = new Date().getTime();
+        return jwt.encode(
+            {
+                sub: id,
+                iat: timeStamp
+            },
+            config.secret
+        );
+    }
+
+    objectToJson() {
+        return {
+            nom: this.nom,
+            email: this.email,
+            password: this.password
+        }
+    }
+
+    isPasswordEqualToSync = async (externalPass) => {
+        return bcrypt.compareSync(externalPass, this.password);
+    }    
 
 }
 

@@ -1,14 +1,22 @@
 import AuthController from '../controllers/AuthController'
+import passport from 'passport';
 
-module.exports = (app, dataBase) => {
-  const authController = require('../controllers/AuthController');
+require('../biblio/passport');
 
-    app.get('/signup', (req, res) => {
-        console.log('signup');
-        AuthController.signup(req, res, dataBase)
-    })
-    .get('/signin', (req, res) => {
-      console.log('signin');
-      AuthController.signin(req, res, dataBase)
-    })
+const requireToken = passport.authenticate('jwt', { session: false});
+const requireValidCredential = passport.authenticate('local', {session: false});
+
+module.exports = (app) => {
+  
+  app.post('/signup', requireValidCredential, (req, res) => {
+      console.log('signup');
+      AuthController.signup(req, res)
+  })
+  .post('/signin', (req, res) => {
+    console.log('signin');
+    AuthController.signin(req, res)
+  })
+  .get('/testJwtTokken', requireToken, (req, res) => {
+    res.send({test: 'test ok'});
+  })
 }

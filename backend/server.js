@@ -2,13 +2,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morganImport from 'morgan'
 import config from './config';
-//import mySQL from '../backend/biblio/mySqlConnexion';
 import routes from './routes/appRoutes'; 
 import authRoutes from './routes/authRoutes';
-import Database from './biblio/Database'
+import Database from './biblio/Database';
+
 const app = express();
 
-const dataBase = new Database(config.dataBase);
+const dataBase = new Database().createPoolConnection();
+global.database = dataBase;
 
 /*************
  * MiddleWare *
@@ -29,7 +30,7 @@ const data = express.Router();
 const auth = express.Router();
 
 routes(data, dataBase);
-authRoutes(auth, dataBase);
+authRoutes(auth);
 
 console.log(config.rootAPI);
 

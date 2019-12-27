@@ -3,46 +3,43 @@ import * as biblio from '../biblio/function';
 
 class AuthController {
 
-    static signup = (req, res, dataBase) => {
-        const email = req.body.email;
-        if (email) {   
-          
-          //no promised
-          /*
-          User._getUserByEmail(dataBase, 'email', (err, user) => {
-            if (err)        
-                res.send(biblio.error(err.message, {}));
-            
-            res.send(biblio.success('', user));
-          }); 
-          */
-
-          //promised
-          User._getUserByEmail_Promise(dataBase, email)
-          .then( rows => res.send(biblio.success('', rows)))
-          .catch( err => res.send(biblio.error(err.message, {})));
-        } else {
-            res.send(biblio.error('no Email found', {}));
-        }
+    static signup = (req, res) => {
+      if (req?.user) {
+        res.send(biblio.success('', { 
+            ...req.user.objectToJson(), 
+            token: User.getTokenForUserId(req.user.id) 
+          }));
+      } else {
+        res.send(biblio.error('user not found', {}));
+      }
     }
     
-    static signin = (req, res, dataBase) => {
-      const {email, nom} = req.body;
-      if (email && nom) {
-        User._getUserByEmail_Promise(dataBase, email)
-        .then( rows => {
-          if (rows.length > 0) {
+    static signin = (req, res) => {
+      const {email, nom, password} = req.body;
+      if (email && nom && password) {
+        const user = new User(req.body);
+        user._getUserByEmail_Promise(email)
+        .then( () => {
+          if (user?.id) {
             res.status(422).send(biblio.error('this Email is already in use', {}))
           } else {
-            const user = new User({email, nom})
-            user.saveUser_Promise(dataBase)
-            .then(() => console.log('user saved'))
-            .catch((err) => console.log(err));
+            user.saveUser_Promise()
+            .then( rows => {
+              if (rows?.affectedRows === 1) {
+                res.status(201).send(biblio.success(`user created`, {
+                                token: User.getTokenForUserId(rows.insertId), 
+                                ...rows
+                              }));
+              } else {
+                res.status(500).send(biblio.error('something goes wrong with user inserted.', {rows}));
+              }              
+            })            
+            .catch( err => res.send(biblio.error(err.message, {})));
           }
         })
         .catch( err => res.send(biblio.error(err.message + '   ' + err.stack, {})));
       } else {
-          res.send(biblio.error('no Email or name found', {}));
+          res.send(biblio.error('no Email or name or password found', req.body));
       }
       
   }
