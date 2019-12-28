@@ -2,16 +2,18 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morganImport from 'morgan'
 import config from './config';
-import routes from './routes/appRoutes'; 
 import authRoutes from './routes/authRoutes';
 import Database from './biblio/Database';
 
 const app = express();
 
+/*****************************************************
+ * Database connection, pass to global for DAO class *
+ ****************************************************/
 const dataBase = new Database().createPoolConnection();
 global.database = dataBase;
 
-/*************
+/**************
  * MiddleWare *
  **************/
 app.use(bodyParser.urlencoded({
@@ -25,16 +27,12 @@ app.use((req, res, next) => {
 });
 app.use(morganImport('dev'));
 
-
-const data = express.Router();
 const auth = express.Router();
 
-routes(data, dataBase);
 authRoutes(auth);
 
 console.log(config.rootAPI);
 
-app.use(`${config.rootAPI}/data`,data);
 app.use(`${config.rootAPI}/`,auth);
 
 app.listen(config.port, () => {

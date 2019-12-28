@@ -9,11 +9,11 @@ const requireValidCredential = passport.authenticate('local', {session: false});
 module.exports = (app) => {
   
   app.post('/signup', requireValidCredential, (req, res) => {
-      console.log('signup');
+      console.log('signup controller');
       AuthController.signup(req, res)
   })
   .post('/signin', (req, res) => {
-    console.log('signin');
+    console.log('signin controller');
     AuthController.signin(req, res)
   })
   .get('/testJwtTokken', requireToken, (req, res) => {

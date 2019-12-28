@@ -1,4 +1,5 @@
-import User from '../model/User';
+import User from '../model/user/User';
+import User_DAO from '../model/user/User_DAO'
 import * as biblio from '../biblio/function';
 
 class AuthController {
@@ -15,26 +16,30 @@ class AuthController {
     }
     
     static signin = (req, res) => {
-      const {email, nom, password} = req.body;
-      if (email && nom && password) {
-        const user = new User(req.body);
-        user._getUserByEmail_Promise(email)
-        .then( () => {
-          if (user?.id) {
+      const {email, password} = req.body;
+      if (email && password) {
+        const user_DAO = new User_DAO();
+        user_DAO.getUserByEmail_DAO_Promise(email)
+        .then( (user) => {
+          if (user?.getId()) {
+            //if email of this new user is already taken
             res.status(422).send(biblio.error('this Email is already in use', {}))
           } else {
-            user.saveUser_Promise()
-            .then( rows => {
-              if (rows?.affectedRows === 1) {
+            const userTosave = new User(req.body).cryptPassword();
+            
+            user_DAO.saveUser_DAO_Promise(userTosave)
+            .then( row => {
+              if (row?.affectedRows === 1) {
+                //if user is saved to database
                 res.status(201).send(biblio.success(`user created`, {
-                                token: User.getTokenForUserId(rows.insertId), 
-                                ...rows
+                                token: User.getTokenForUserId(row.insertId), 
+                                ...row
                               }));
               } else {
-                res.status(500).send(biblio.error('something goes wrong with user inserted.', {rows}));
+                res.status(500).send(biblio.error('something goes wrong with user inserted.', {row}));
               }              
             })            
-            .catch( err => res.send(biblio.error(err.message, {})));
+            .catch( err => res.send(biblio.error(err.stack, {})));
           }
         })
         .catch( err => res.send(biblio.error(err.message + '   ' + err.stack, {})));

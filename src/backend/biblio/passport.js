@@ -1,5 +1,5 @@
 import passport from 'passport';
-import User from '../model/User';
+import User_DAO from '../model/user/User_DAO'
 import config from '../config';
 import Jwt from 'passport-jwt';
 import localStrategy from 'passport-local'; 
@@ -13,14 +13,16 @@ const jwtOptions = {
 };
 
 const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
+    console.log(payload.sub);
+    if(!payload?.sub) {
+        return done(null, false);
+    }
     const userId = payload.sub;
-    const user = new User();
-    const connection = global.database.createConnection();
-    //return done(null, {});
+    const user_DAO = new User_DAO();
     
-    user.userFindById_Promise( userId)
-        .then( () => {
-            if(user?.id){
+    user_DAO.userFindById_DAO_Promise(userId)
+        .then( (user) => {
+            if(user?.getId() && user?.getId() === payload.sub){
                 return done(null, user);
             } else {
                 return done(null, false);
@@ -30,24 +32,18 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
         .catch((err) => {
             return done(err, false);
         })
-        .finally(() => {
-            connection.closeConnection_Pomise()
-                .then(() => console.log('passport close the mySQL connection'))
-                .catch((err) => console.log('error during passport closing connection'))
-        })
 });
 
 const localOptions = {usernameField : 'email'};
 
 const localLoginStrategy = new localStrategy(localOptions, (email, password, done) => {
-    const user = new User();
-    const connection = global.database.createConnection();
-    user._getUserByEmail_Promise(email)
-    .then( async () => {
+    const user_DAO = new User_DAO();
+    
+    user_DAO.getUserByEmail_DAO_Promise(email)
+    .then( async (user) => {
         try{
             if(user) {
                 const isEqualPass = await user.isPasswordEqualToSync(password);
-                console.log({isEqualPass})
                 if(isEqualPass)
                     return done(null, user);
             }
@@ -59,11 +55,6 @@ const localLoginStrategy = new localStrategy(localOptions, (email, password, don
     })
     .catch((err) => {
         return done(err);
-    })
-    .finally(() => {
-        connection.closeConnection_Pomise()
-            .then(() => console.log('passport close the mySQL connection'))
-            .catch((err) => console.log('error during passport closing connection'))
     })
 })
 

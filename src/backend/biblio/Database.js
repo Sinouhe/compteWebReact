@@ -3,8 +3,8 @@ import config from '../config';
 
 class Database {
 
-    connection = undefined;
-    poolConnection = undefined;
+    #connection = undefined;
+    #poolConnection = undefined;
 
 
     constructor() {        
@@ -13,7 +13,7 @@ class Database {
 
     closePoolConnection = () => {
         return new Promise( ( resolve, reject ) => {
-            this.poolConnection.end( err => {
+            this.#poolConnection.end( err => {
                 if ( err )
                     return reject( err );
                 resolve();
@@ -22,11 +22,11 @@ class Database {
     };
 
     getPoolConnection = () => {
-        return this.poolConnection;
+        return this.#poolConnection;
     };
 
     createPoolConnection = () => {
-        this.poolConnection =  mysql.createPool({
+        this.#poolConnection =  mysql.createPool({
                 ConnectionLimit: config.dataBaseConnectionLimit, 
                 ...config.dataBase
             });
@@ -34,17 +34,17 @@ class Database {
     };
 
     createConnection = () => {
-        this.connection = mysql.createConnection(config.dataBase)
+        this.#connection = mysql.createConnection(config.dataBase)
         return this;
     };
 
     getConnection = () => {
-        return this.connection;
+        return this.#connection;
     };
 
     closeConnection_Pomise = () => {
         return new Promise( ( resolve, reject ) => {
-            this.connection.end( err => {
+            this.#connection.end( err => {
                 if ( err )
                     return reject( err );
                 resolve();
@@ -52,6 +52,7 @@ class Database {
         } );
     };
 
+    //main method to launch query, all query pass by here, if we need to log something or what ever
     handleQuery = (connection, queryString, args, callback) => {
         return connection.query( queryString, args, callback);
     }   

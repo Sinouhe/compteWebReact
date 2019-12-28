@@ -6,15 +6,10 @@ class AbstractSuperClass {
     }
     
     if (this.objectToJson === undefined) {
-        throw new TypeError('you must implement method objectToJson due to AbstractSuperClass extends');
+        throw new TypeError(`you must implement method objectToJson due to AbstractSuperClass extends in ${this.constructor}`);
     }
 
   }
-
-  toStringDatabase = (string) => {
-    return `'${string}'`;
-  }
- 
 
 }
  
