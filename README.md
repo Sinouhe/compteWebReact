@@ -3,10 +3,6 @@
 
 program to handle your account
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
 first you need a mysql database "mydb" and run the starter.mysql script attached at the root of the project.
@@ -109,7 +105,7 @@ if you need to configure your mysql database please check at :
 
 ## Authors
 
-* **sinohe FOUQUEAU** 
+* **sinouhe FOUQUEAU** 
 
 ## License
 
