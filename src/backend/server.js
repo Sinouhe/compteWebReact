@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import morganImport from 'morgan';
 import config from './config';
 import authRoutes from './routes/authRoutes';
-import Database from './biblio/Database'
+import Database from './biblio/Database';
 
 const app = express();
 
