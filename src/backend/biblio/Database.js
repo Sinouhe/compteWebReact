@@ -31,7 +31,7 @@ class Database {
                 ConnectionLimit: config.numberOfMaxConnection, 
                 ...config.dataBase
             });
-        console.log(`pool connection to mysql created, ${numberOfMaxConnection} max connection opened.`)
+        console.log(`pool connection to mysql created, ${numberOfMaxConnection} max connection opened.`);
         return this;
     };
 
