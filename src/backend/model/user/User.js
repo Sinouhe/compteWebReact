@@ -1,7 +1,7 @@
-import AbstractSuperClass from '../AbstractSuperClass'
+import AbstractSuperClass from '../AbstractSuperClass';
 import bcrypt from 'bcrypt-nodejs';
 import jwt from 'jwt-simple';
-import config from '../../config'
+import config from '../../config';
 import {cryptMdpSync} from '../../biblio/function';
 
 
@@ -103,7 +103,7 @@ class User extends AbstractSuperClass {
             prenom: this.getPrenom(),
             email: this.getEmail(),
             password: this.getPassword()
-        }
+        };
     }
 
     isPasswordEqualToSync = async (externalPass) => {

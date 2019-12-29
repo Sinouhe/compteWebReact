@@ -15,12 +15,12 @@ class AbstractSuperClassDAO {
     }
    
     getDatabase = () => {
-        return this.#database
+      return this.#database;
     }
 
     setDatabase = () => {
-        return this.#database
+        return this.#database;
     }  
 }
    
-  module.exports = AbstractSuperClassDAO;
+module.exports = AbstractSuperClassDAO;

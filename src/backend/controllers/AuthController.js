@@ -1,5 +1,5 @@
 import User from '../model/user/User';
-import User_DAO from '../model/user/User_DAO'
+import User_DAO from '../model/user/User_DAO';
 import * as biblio from '../biblio/function';
 
 class AuthController {
@@ -23,7 +23,7 @@ class AuthController {
         .then( (user) => {
           if (user?.getId()) {
             //if email of this new user is already taken
-            res.status(422).send(biblio.error('this Email is already in use', {}))
+            res.status(422).send(biblio.error('this Email is already in use', {}));
           } else {
             const userTosave = new User(req.body).cryptPassword();
             

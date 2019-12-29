@@ -9,13 +9,14 @@ class Database {
 
     constructor() {        
         return this;
-    };
+    }
 
     closePoolConnection = () => {
         return new Promise( ( resolve, reject ) => {
             this.#poolConnection.end( err => {
-                if ( err )
+                if ( err ) {
                     return reject( err );
+                }                    
                 resolve();
             } );
         } );
@@ -25,16 +26,17 @@ class Database {
         return this.#poolConnection;
     };
 
-    createPoolConnection = () => {
+    createPoolConnection = (numberOfMaxConnection) => {
         this.#poolConnection =  mysql.createPool({
-                ConnectionLimit: config.dataBaseConnectionLimit, 
+                ConnectionLimit: config.numberOfMaxConnection, 
                 ...config.dataBase
             });
+        console.log(`pool connection to mysql created, ${numberOfMaxConnection} max connection opened.`)
         return this;
     };
 
     createConnection = () => {
-        this.#connection = mysql.createConnection(config.dataBase)
+        this.#connection = mysql.createConnection(config.dataBase);
         return this;
     };
 
@@ -45,8 +47,9 @@ class Database {
     closeConnection_Pomise = () => {
         return new Promise( ( resolve, reject ) => {
             this.#connection.end( err => {
-                if ( err )
+                if ( err ) {
                     return reject( err );
+                }                    
                 resolve();
             } );
         } );

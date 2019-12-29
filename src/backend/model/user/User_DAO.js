@@ -1,11 +1,11 @@
 import User from './User';
 import AbstractSuperClassDAO from '../AbstractSuperClassDAO';
 
-const _SELECT = "USER_id, \
+const _SELECT = 'USER_id, \
 USER_nom, \
 USER_prenom, \
 USER_email, \
-USER_password";
+USER_password';
 
 class User_DAO extends AbstractSuperClassDAO {
 
@@ -31,8 +31,9 @@ class User_DAO extends AbstractSuperClassDAO {
                                             queryString, 
                                             [], 
                                             ( err, row ) => {
-                if ( err )
+                if ( err ) {
                     return reject( err );
+                }                    
 
                 if(row.length > 0 ) {
                     user = new User();
@@ -56,8 +57,9 @@ class User_DAO extends AbstractSuperClassDAO {
                                             queryString, 
                                             [], 
                                             ( err, row ) => {
-                if ( err )
+                if ( err ) {
                     return reject( err );
+                }                       
 
                 if(row.length > 0 ) {
                     user = new User();
@@ -80,15 +82,16 @@ class User_DAO extends AbstractSuperClassDAO {
                                 ${this.toStringDatabase(user.getNom())}, \
                                 ${this.toStringDatabase(user.getPrenom())}, \
                                 ${this.toStringDatabase(user.getEmail())}, \
-                                ${this.toStringDatabase(user.getPassword())})`
+                                ${this.toStringDatabase(user.getPassword())})`;
 
         return new Promise( ( resolve, reject ) => {
             return this.getDatabase().handleQuery(this.getDatabase().getPoolConnection(), 
                                             queryString, 
                                             [], 
                                             ( err, row ) => {
-                if ( err )
-                    return reject( err ); 
+                if ( err ) {
+                    return reject( err );
+                }                    
 
                 resolve(row);
             });

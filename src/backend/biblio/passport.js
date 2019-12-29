@@ -1,5 +1,5 @@
 import passport from 'passport';
-import User_DAO from '../model/user/User_DAO'
+import User_DAO from '../model/user/User_DAO';
 import config from '../config';
 import Jwt from 'passport-jwt';
 import localStrategy from 'passport-local'; 
@@ -31,7 +31,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
         })
         .catch((err) => {
             return done(err, false);
-        })
+        });
 });
 
 const localOptions = {usernameField : 'email'};
@@ -41,22 +41,16 @@ const localLoginStrategy = new localStrategy(localOptions, (email, password, don
     
     user_DAO.getUserByEmail_DAO_Promise(email)
     .then( async (user) => {
-        try{
-            if(user) {
-                const isEqualPass = await user.isPasswordEqualToSync(password);
-                if(isEqualPass)
-                    return done(null, user);
-            }
-            return done(null, false);
-        } 
-        catch(err) {
-            throw err;
+        const isEqualPass = await user.isPasswordEqualToSync(password);
+        if(isEqualPass) {
+            return done(null, user);
         }
+        return done(null, false);        
     })
     .catch((err) => {
         return done(err);
-    })
-})
+    });
+});
 
 passport.use(jwtLogin);
 passport.use(localLoginStrategy);
