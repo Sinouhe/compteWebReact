@@ -26,6 +26,10 @@ class Database {
         return this.#poolConnection;
     };
 
+    getConnection = () => {
+        return this.#connection;
+    };
+
     createPoolConnection = (numberOfMaxConnection) => {
         this.#poolConnection =  mysql.createPool({
                 ConnectionLimit: config.numberOfMaxConnection, 
@@ -40,9 +44,6 @@ class Database {
         return this;
     };
 
-    getConnection = () => {
-        return this.#connection;
-    };
 
     closeConnection_Pomise = () => {
         return new Promise( ( resolve, reject ) => {

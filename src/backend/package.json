@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "set NODE_ENV=development&& nodemon --exec babel-node server.js",
-    "prod": "set NODE_ENV=production&& nodemon --exec babel-node server.js"
+    "dev": "set NODE_ENV=development&& nodemon --exec babel-node server.js"
   },
   "keywords": [],
   "author": "",

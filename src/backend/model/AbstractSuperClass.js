@@ -1,3 +1,12 @@
+/**
+ * Contract all model class for need to serve
+ * 
+ * model is divided in 2 part :
+ * - DAO class for database object model relational.
+ * - class for business logic
+ * 
+ */
+
 class AbstractSuperClass {
  
   constructor() {

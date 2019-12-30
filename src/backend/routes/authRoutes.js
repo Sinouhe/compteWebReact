@@ -1,7 +1,7 @@
 import AuthController from '../controllers/AuthController';
 import passport from 'passport';
 
-require('../biblio/passport');
+require('../tools/passport');
 
 const requireToken = passport.authenticate('jwt', { session: false});
 const requireValidCredential = passport.authenticate('local', {session: false});

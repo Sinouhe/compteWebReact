@@ -1,15 +1,30 @@
 import User from './User';
 import AbstractSuperClassDAO from '../AbstractSuperClassDAO';
 
-const _SELECT = 'USER_id, \
-USER_nom, \
-USER_prenom, \
-USER_email, \
-USER_password';
+const allColumnsSelect = [
+    'USER_id', 
+    'USER_nom',
+    'USER_prenom', 
+    'USER_email',
+    'USER_password'
+];
+
+const allColumnsInsert = [
+    'USER_nom',
+    'USER_prenom', 
+    'USER_email',
+    'USER_password'
+];
+
+const tableName =  'users';
+
+/**
+ * all method user class regarding database logic
+ */
 
 class User_DAO extends AbstractSuperClassDAO {
 
-    constructor(database = global.database){
+    constructor(database = undefined){
         super(database);
     }   
 
@@ -23,18 +38,18 @@ class User_DAO extends AbstractSuperClassDAO {
 
     getUserByEmail_DAO_Promise = (email) => {
         let user = undefined;
-        let queryString = `SELECT ${_SELECT} \
-                    FROM users \
-                    WHERE USER_email = ${this.toStringDatabase(email)}`;
+        let queryString = `SELECT ?? 
+                            FROM ?? 
+                            WHERE USER_email = ?;`;
         return new Promise(( resolve, reject ) => {
             return this.getDatabase().handleQuery(this.getDatabase().getPoolConnection(), 
                                             queryString, 
-                                            [], 
+                                            [allColumnsSelect, tableName, email], 
                                             ( err, row ) => {
                 if ( err ) {
                     return reject( err );
-                }                    
-
+                }                  
+                
                 if(row.length > 0 ) {
                     user = new User();
                     this.#loadUserFromRow(row, user);
@@ -48,14 +63,14 @@ class User_DAO extends AbstractSuperClassDAO {
 
     userFindById_DAO_Promise = (id) => {
         let user = undefined;
-        let queryString = `SELECT ${_SELECT} \
-                    FROM users \
-                    WHERE USER_id = ${id}`;
+        let queryString = `SELECT ??
+                    FROM ?? 
+                    WHERE USER_id = ?;`;
 
         return new Promise( ( resolve, reject ) => {
             return this.getDatabase().handleQuery(this.getDatabase().getPoolConnection(), 
                                             queryString, 
-                                            [], 
+                                            [allColumnsSelect, tableName, id], 
                                             ( err, row ) => {
                 if ( err ) {
                     return reject( err );
@@ -73,21 +88,20 @@ class User_DAO extends AbstractSuperClassDAO {
 
     
     saveUser_DAO_Promise = (user) => {
-        let queryString = `INSERT INTO users ( \
-                                USER_nom, \
-                                USER_Prenom, \
-                                USER_email, \
-                                USER_password) \
-                            values( \
-                                ${this.toStringDatabase(user.getNom())}, \
-                                ${this.toStringDatabase(user.getPrenom())}, \
-                                ${this.toStringDatabase(user.getEmail())}, \
-                                ${this.toStringDatabase(user.getPassword())})`;
+        let queryString = `INSERT INTO ?? (??)
+                            values(?, ?, ?, ?)`;
 
         return new Promise( ( resolve, reject ) => {
             return this.getDatabase().handleQuery(this.getDatabase().getPoolConnection(), 
                                             queryString, 
-                                            [], 
+                                            [
+                                                tableName,
+                                                allColumnsInsert, 
+                                                user.getNom(), 
+                                                user.getPrenom(), 
+                                                user.getEmail(), 
+                                                user.getPassword()
+                                            ], 
                                             ( err, row ) => {
                 if ( err ) {
                     return reject( err );

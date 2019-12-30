@@ -9,5 +9,6 @@ module.exports = {
         database: 'mydb'
     },
     dataBaseConnectionLimit: 10,
+    modeDev: 'development'
 };
 

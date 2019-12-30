@@ -2,81 +2,83 @@ import AbstractSuperClass from '../AbstractSuperClass';
 import bcrypt from 'bcrypt-nodejs';
 import jwt from 'jwt-simple';
 import config from '../../config';
-import {cryptMdpSync} from '../../biblio/function';
+import {cryptMdpSync} from '../../tools/utils';
 
-
+/**
+ * all method user class regarding business logic
+ */
 
 class User extends AbstractSuperClass {
     
-    passwordSaltRound = 10;
+    #passwordSaltRound = 10;
 
-    id = undefined;
-    nom;
-    prenom;
-    email;
-    password;
+    #id = undefined;
+    #nom;
+    #prenom;
+    #email;
+    #password;
 
     constructor({nom, prenom, email, password} = {}) {
         super();
-        nom ? this.nom = nom : this.nom = '';
-        prenom ? this.prenom = prenom : this.prenom = '';
-        email ? this.email = email : this.email = '';
-        password ? this.password = password : this.password = '';
+        nom ? this.#nom = nom : this.#nom = '';
+        prenom ? this.#prenom = prenom : this.#prenom = '';
+        email ? this.#email = email : this.#email = '';
+        password ? this.#password = password : this.#password = '';
         return this;
     }
 
     setId = (id) => {
-        this.id = id;
+        this.#id = id;
         return this;
     }
 
     setNom = (nom) => {
-        this.nom = nom;
+        this.#nom = nom;
         return this;
     }
 
     setPrenom = (prenom) => {
-        this.prenom = prenom;
+        this.#prenom = prenom;
         return this;
     }
 
     setEmail = (email) => {
-        this.email = email;
+        this.#email = email;
         return this;
     }
 
     setPassword = (password) => {
-        this.password = password;
+        this.#password = password;
         return this;
     }
 
     setPasswordSaltRound = (passwordSaltRound) => {
-        this.passwordSaltRound = passwordSaltRound;
+        this.#passwordSaltRound = passwordSaltRound;
         return this;
     }
 
     getNom = () => {
-        return this.nom;
+        return this.#nom;
     }
 
     getPrenom = () => {
-        return this.prenom;
+        return this.#prenom;
     }
 
     getEmail = () => {
-        return this.email;
+        return this.#email;
     }
 
     getPassword = () => {
-        return this.password;
+        return this.#password;
     }
 
     getPasswordSaltRound = () => {
-        return this.passwordSaltRound;
+        return this.#passwordSaltRound;
     }
 
     getId = () => {
-        return this.id;
+        return this.#id;
     }
 
     cryptPassword = () => {
@@ -97,7 +99,7 @@ class User extends AbstractSuperClass {
 
     objectToJson() {
         return {
-            class: 'User',
+            class: this.constructor.name,
             id: this.getId(),
             nom: this.getNom(),
             prenom: this.getPrenom(),
