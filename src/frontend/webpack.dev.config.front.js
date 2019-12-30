@@ -1,7 +1,8 @@
-const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const path = require('path'),
+    { CleanWebpackPlugin } = require('clean-webpack-plugin'),
+    HtmlWebpackPlugin = require('html-webpack-plugin'),
+    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
+    ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 module.exports = {
     // le fichier js d'entrée
@@ -19,7 +20,7 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, './dist/front'),
         index: 'index.html',
-        port: 9001
+        port: 9003
     },
     
     module: {
@@ -68,6 +69,7 @@ module.exports = {
             template: path.resolve( __dirname, 'public/index.html' ),
             filename: 'index.html'
         }),
-        new BundleAnalyzerPlugin({analyzerPort: 50001})
+        new BundleAnalyzerPlugin({analyzerPort: 50002}),
+        new ProgressBarPlugin()
     ]
 };
