@@ -20,7 +20,7 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, './dist/front'),
         index: 'index.html',
-        port: 3002
+        port: 3000
     },
     
     module: {
@@ -69,7 +69,7 @@ module.exports = {
             template: path.resolve( __dirname, 'public/index.html' ),
             filename: 'index.html'
         }),
-        //new BundleAnalyzerPlugin({analyzerPort: 3000}),
+        //new BundleAnalyzerPlugin({analyzerPort: 3001}),
         new ProgressBarPlugin()
     ]
 };

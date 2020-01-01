@@ -64,8 +64,8 @@ class User_DAO extends AbstractSuperClassDAO {
     userFindById_DAO_Promise = (id) => {
         let user = undefined;
         let queryString = `SELECT ??
-                    FROM ?? 
-                    WHERE USER_id = ?;`;
+                            FROM ?? 
+                            WHERE USER_id = ?;`;
 
         return new Promise( ( resolve, reject ) => {
             return this.getDatabase().handleQuery(this.getDatabase().getPoolConnection(), 

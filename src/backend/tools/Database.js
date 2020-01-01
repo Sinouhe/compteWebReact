@@ -56,7 +56,8 @@ class Database {
         } );
     };
 
-    //main method to launch query, all query pass by here, if we need to log something or what ever
+    // main method to launch query, all queries pass by here, if we need to log something or what ever
+    // about queries, do it here
     handleQuery = (connection, queryString, args, callback) => {
         return connection.query( queryString, args, callback);
     }   

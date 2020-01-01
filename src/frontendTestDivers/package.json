@@ -3,17 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sinouhe/module": "^1.0.0",
+    "axios": "^0.19.0",
     "react": "=16.12.0",
     "react-dom": "=16.12.0"
   },
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.config.front.js --hot",
-    "build:prod": "webpack --config webpack.prod.config.front.js",
-    "publish:npm": "rm -rf dist && mkdir dist &&  babel src -d module --copy-files"
+    "build:prod": "webpack --config webpack.prod.config.front.js"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.7",
-    "@babel/core": "^7.7.7",
+    "@babel/core": "=7.7.7",
     "@babel/node": "=7.7.7",
     "@babel/plugin-proposal-class-properties": "=7.7.4",
     "@babel/plugin-proposal-optional-chaining": "=7.7.5",

@@ -6,9 +6,11 @@
   },
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
+    "devFront": "npm-run-all --parallel dev:front*",
     "dev:Backend": "cd src/backend && npm run dev",
     "dev:frontend": "cd src/frontend && npm run dev",
-    "postinstall": "cd src/backend && npm install && cd ../frontend && npm install",
+    "dev:frontendTestDivers": "cd src/frontendTestDivers && npm run dev",
+    "postinstall": "cd src/backend && npm install && cd ../frontend && npm install && cd ../frontendTestDivers && npm install",
     "lint": "eslint ."
   },
   "devDependencies": {
