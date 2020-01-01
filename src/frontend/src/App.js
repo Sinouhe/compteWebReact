@@ -7,7 +7,7 @@ class App extends React.Component {
     // long process
     let fakeProcessing = 0;
     for(let i = 0 ; i < 2000000000 ; i++) {
-      fakeProcessing++;
+      fakeProcessing = fakeProcessing + 1;
     }
     // console.log('end processing');
     return (
