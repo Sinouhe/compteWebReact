@@ -26,6 +26,7 @@ class AuthController {
      * for jwt protected route
      */
     static signin = (req, res) => {
+      console.log(req.body);
       const {email, password} = req.body;
       if (email && password) {
         const user_DAO = new User_DAO();        

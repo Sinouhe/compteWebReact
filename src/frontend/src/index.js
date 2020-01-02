@@ -1,7 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import '@babel/polyfill';
+import App from './component/App';
+import axios from 'axios';
+import reducers from './reducers';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas';
 
-//console.log('load begin');
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 
-ReactDOM.render(<App />, document.getElementById('lazyLoad'));
+sagaMiddleware.run(rootSaga);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>, 
+    document.getElementById('root')
+);

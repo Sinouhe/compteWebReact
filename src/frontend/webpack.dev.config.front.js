@@ -56,10 +56,21 @@ module.exports = {
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            "@babel/preset-env",
+                            "@babel/preset-react"
+                        ],
+                        plugins: [
+                            [
+                            "@babel/plugin-proposal-class-properties"
+                            ]
+                        ],
+                    }
                 }
             }
         ]
-    },
+    },    
     // plugins sont des librairies qui font ce que les loader ne peuvent faire
     // on peut aussi avec d'autre pluggin créer des constante etc ...
     // CleanWebpackPlugin va supprimer tout les fichier du dist folder avant un run build
