@@ -8,11 +8,9 @@ const logInUser = (credentials) => {
 
     axios.post(url,credentials)
         .then(response => {
-            console.log('success')
             console.log(response);
         })
         .catch((err) => {
-            console.log('error')
             console.log(err);
         });
 

@@ -19,13 +19,13 @@ const usersReducer = (state = INITIAL_STATE, action) => {
             newState = {
                 ...state,
                 error: action.payload.error
-            }
+            };
             break;
         default :
             newState = state;
             break;
     }    
     return newState;
-}
+};
 
 export default usersReducer;

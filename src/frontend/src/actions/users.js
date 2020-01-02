@@ -8,7 +8,7 @@ export const signinUser = (credentials) => {
         payload: {
             credentials
         }
-    }
+    };
 };
 
 export const usersError = ({error}) => {
@@ -17,6 +17,6 @@ export const usersError = ({error}) => {
         payload: {
             error
         }
-    }
+    };
 };
 
