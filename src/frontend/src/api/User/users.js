@@ -6,16 +6,7 @@ const logInUser = (credentials) => {
     console.log('in API ' + url);
     console.log(credentials);
 
-    axios.post(
-            url,
-            {
-                email: 'salut',
-                password: '1234'
-            },
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        })
+    axios.post(url,credentials)
         .then(response => {
             console.log('success')
             console.log(response);
