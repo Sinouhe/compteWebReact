@@ -1,10 +1,14 @@
-import React from 'react';
-import FormLogin from './FormLogin';
+import React, { Fragment } from 'react';
+import LoginFormContainer from '../containers/LoginFormContainer';
 
 class App extends React.Component {
 
   render() {
-    return <FormLogin/>;
+    return (
+      <Fragment>
+        <LoginFormContainer/>
+      </Fragment>
+    );
   }
 }
 

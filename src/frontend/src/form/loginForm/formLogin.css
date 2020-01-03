@@ -1,0 +1,13 @@
+.login-form {
+  max-width: 300px;
+}
+.login-form-element {
+  margin-top: 10px;
+}
+.login-form-button {
+  margin-top: 10px;
+  width: 100%;
+}
+.login-form-error {
+  color: red;
+}
