@@ -20,7 +20,8 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, './dist'),
         index: 'index.html',
-        port: 9002
+        port: 8080,
+        historyApiFallback: true
     },
     module: {
         rules: [
@@ -51,7 +52,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
@@ -70,6 +71,9 @@ module.exports = {
             }
         ]
     },    
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
     // plugins sont des librairies qui font ce que les loader ne peuvent faire
     // on peut aussi avec d'autre pluggin créer des constante etc ...
     // CleanWebpackPlugin va supprimer tout les fichier du dist folder avant un run build
