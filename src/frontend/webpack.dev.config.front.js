@@ -1,7 +1,7 @@
 const path = require('path'),
     { CleanWebpackPlugin } = require('clean-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
-    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
+    //BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, './dist'),
         index: 'index.html',
-        port: 9001
+        port: 9002
     },
     module: {
         rules: [
@@ -79,7 +79,7 @@ module.exports = {
             template: path.resolve( __dirname, 'public/index.html' ),
             filename: 'index.html'
         }),
-        new BundleAnalyzerPlugin({analyzerPort: 50001}),
+        //new BundleAnalyzerPlugin({analyzerPort: 50001}),
         new ProgressBarPlugin()
     ]
 };
