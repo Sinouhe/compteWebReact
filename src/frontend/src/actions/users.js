@@ -1,5 +1,6 @@
 export const Types = {
-    USER_LOGIN: 'users/user_login'
+    USER_LOGIN: 'users/user_login',
+    USERS_ERROR: 'users/user_error'
 };
 
 export const signinUser = (credentials) => {

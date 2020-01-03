@@ -1,20 +1,9 @@
-import axios from 'axios';
 import confApi from '../confApi';
+import { serviceAxiosBackend } from '../config/serviceAxiosBackend';
 
 const logInUser = (credentials) => {
-    const url = confApi.endPoint + '/signin'; 
-    console.log('in API ' + url);
-    console.log(credentials);
-
-    axios.post(url,credentials)
-        .then(response => {
-            console.log(response);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-
-    return null;
+    const url = confApi.endPoint + confApi.logUser; 
+    return serviceAxiosBackend().post(url,credentials);
 };
 
 export {logInUser};

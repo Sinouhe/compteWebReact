@@ -4,11 +4,17 @@ import { logInUser } from '../api/User/users';
 
 function* loginUser(action) {
     try{
-        yield call(logInUser, action.payload.credentials);
+        const result = yield call(logInUser, action.payload.credentials);
+        if(result?.data?.status === 'success' && result?.data?.result?.token) {
+            localStorage.setItem('tokenBackenAuthent', result.data.result.token);
+            yield put(actions.usersError({error: ''}));
+        } else if (result?.data?.status === 'success') {
+            throw new Error('no token in the response from the back end for this user');
+        }
         
-    }catch(e){
+    }catch(err){
         yield put(actions.usersError({
-            error: 'An error occured when trying to log the user'
+            error: `An error occured when trying to log the user, ${err.message}`
         }));
     }
 }
@@ -16,8 +22,6 @@ function* loginUser(action) {
 function* watchUserLoginRequest(){
     yield takeLatest(actions.Types.USER_LOGIN, loginUser);
 }
-
-
 
 const usersSagas = [
     fork(watchUserLoginRequest)

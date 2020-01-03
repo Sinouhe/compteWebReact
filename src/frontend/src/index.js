@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '@babel/polyfill';
+import axios from 'axios';
 import App from './component/App';
 import reducers from './reducers';
 import {Provider} from 'react-redux';

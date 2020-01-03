@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { signinUser } from '../actions/users';
+import { signinUser, usersError } from '../actions/users';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import './formLogin.css';
@@ -61,7 +61,8 @@ class LoginForm extends React.Component {
           </Button>
           Or <a href="">register now!</a>
         </Form.Item>
-      </Form>
+        <div>{this.props.users.error}</div>
+      </Form>      
     );
   }
 }
@@ -71,8 +72,15 @@ const loginForm = reduxForm({
   fields: Object.keys(FIELDS),
 })(LoginForm);
 
-const mapDispatchToProps = {
-  signinUser
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+  };
 };
 
-export default connect(null, mapDispatchToProps)(loginForm);
+const mapDispatchToProps = {
+  signinUser,
+  usersError
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(loginForm);

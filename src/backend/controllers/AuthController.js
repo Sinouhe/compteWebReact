@@ -11,7 +11,7 @@ class AuthController {
     static signup = (req, res) => {
       if (req?.user) {
         res.send(responseHandler.success('', { 
-            ...req.user.objectToJson(), 
+            ...req.user, 
             token: User.getTokenForUserId(req.user.id) 
           }));
       } else {
@@ -26,7 +26,6 @@ class AuthController {
      * for jwt protected route
      */
     static signin = (req, res) => {
-      console.log(req.body);
       const {email, password} = req.body;
       if (email && password) {
         const user_DAO = new User_DAO();        
