@@ -5,14 +5,19 @@ import { logInUser } from '../api/User/users';
 function* loginUser(action) {
     try{
         const result = yield call(logInUser, action.payload.credentials);
+
         if(result?.data?.status === 'success' && result?.data?.result?.token) {
             localStorage.setItem('tokenBackenAuthent', result.data.result.token);
             yield put(actions.usersError({error: ''}));
+            yield put(actions.setAuthentification(true));
         } else if (result?.data?.status === 'success') {
             throw new Error('no token in the response from the back end for this user');
         }
         
     }catch(err){
+        if (err?.response?.status === 401) {
+            action.payload.setErrors({errorsLogin: 'bad credentials'});
+           }
         yield put(actions.usersError({
             error: `An error occured when trying to log the user, ${err.message}`
         }));

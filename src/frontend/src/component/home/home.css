@@ -1,0 +1,13 @@
+.center-height-home-text {
+    position: absolute;
+    top: 40%; /* poussé de moins de la moitié de hauteur du référent */
+    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+    text-align: center;
+    width: 100%;
+}
+
+.center-widht-home-text {
+    margin-left: auto;
+    margin-right: auto;
+}
+

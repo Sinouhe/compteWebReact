@@ -2,7 +2,9 @@ import { Types } from '../actions/users';
 
 const INITIAL_STATE = {
     items: [],
-    error: ''
+    isLoggedIn: false,
+    error: '',
+    errorsLogin: ''
 };
 
 
@@ -19,6 +21,12 @@ const usersReducer = (state = INITIAL_STATE, action) => {
             newState = {
                 ...state,
                 error: action.payload.error
+            };
+            break;
+        case Types.USERS_SET_AUTHENTIFICATION:
+            newState = {
+                ...state,
+                isLoggedIn: action.payload
             };
             break;
         default :

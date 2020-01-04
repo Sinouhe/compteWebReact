@@ -1,5 +1,5 @@
 import confApi from '../confApi';
-import { serviceAxiosBackend } from '../config/serviceAxiosBackend';
+import { serviceAxiosBackend } from '../service/serviceAxiosBackend';
 
 const logInUser = (credentials) => {
     const url = confApi.endPoint + confApi.logUser; 
