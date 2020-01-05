@@ -1,12 +1,12 @@
 import React from 'react';
-import LoginForm from '../../form/loginForm/LoginForm';
-import { signinUser } from '../../actions/users';
+import RegisterFrom from '../../form/registerForm/RegisterForm';
+import { registerUser } from '../../actions/users';
 import { connect } from 'react-redux';
 import { Card } from 'antd';
 import './users.css';
 import { withRouter } from 'react-router-dom';
 
-class LoginFormContainer extends React.Component {
+class RegisterForm extends React.Component {
 
     componentDidMount = () => {
         if(this.props.isLoggedIn === true) {
@@ -14,8 +14,9 @@ class LoginFormContainer extends React.Component {
         }
     }
 
-    handleSubmit = (credentials, setError) => {
-        this.props.signinUser(credentials, setError, this.props.history);
+    handleSubmit = (values, setError) => {
+        console.log(values);
+        this.props.registerUser(values, setError, this.props.history);
     }
 
     render() {
@@ -25,7 +26,7 @@ class LoginFormContainer extends React.Component {
                                         marginLeft: '6%', 
                                         top: 20
                                         }} className='card-login-form'>
-                <LoginForm handleSubmitParent={this.handleSubmit}/>
+                <RegisterFrom handleSubmitParent={this.handleSubmit}/>
             </Card>
         );
     }
@@ -38,7 +39,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    signinUser
+    registerUser
 };
   
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterForm));

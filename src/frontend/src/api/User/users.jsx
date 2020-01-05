@@ -6,4 +6,9 @@ const logInUser = (credentials) => {
     return serviceAxiosBackend().post(url,credentials);
 };
 
-export {logInUser};
+const registerUserApi = (values) => {
+    const url = confApi.endPoint + confApi.registerUser; 
+    return serviceAxiosBackend().post(url,values);
+};
+
+export {logInUser, registerUserApi};

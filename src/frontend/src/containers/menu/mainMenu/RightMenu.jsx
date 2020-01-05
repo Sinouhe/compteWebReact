@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 class RightMenu extends Component {
 
   registerToShow = () => {
-    if (this.props.isLoggedIn) {
+    if (this.props.isLoggedIn === false) {
       return (
         <Menu.Item key='app'>
           <Link to="/register">register</Link>
@@ -20,7 +20,7 @@ class RightMenu extends Component {
     return (
 			<Menu mode='horizontal'>
         <Menu.Item key='mail'>
-          { this.props.isLoggedIn ? <Link to="/logout">Logout</Link> : <Link to="/login">Login</Link> }
+          { this.props.isLoggedIn === true ? <Link to="/logout">Logout</Link> : <Link to="/login">Login</Link> }
         </Menu.Item>
         {this.registerToShow()}
       </Menu>

@@ -33,7 +33,7 @@ class AuthController {
         .then( (user) => {
           if (user?.getId()) {
             //if email of this new user is already taken
-            res.status(422).send(responseHandler.error('this Email is already in use', {}));
+            res.status(200).send(responseHandler.error('this Email is already in use', {}));
           } else {
             const userTosave = new User(req.body).cryptPassword();
             

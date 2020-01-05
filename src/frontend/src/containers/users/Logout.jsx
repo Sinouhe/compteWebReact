@@ -1,13 +1,15 @@
   
 import React, { Component } from 'react';
-//import { connect } from 'react-redux';
-//import * as actions from '../../actions/users';
+import { connect } from 'react-redux';
+import { signinOut } from '../../actions/users';
+import { withRouter } from 'react-router-dom';
 
 class Logout extends Component {
 
-    componentWillMount() {
-        //this.props.signoutUser()
+    componentDidMount() {
+        this.props.signinOut();
     }
+
 
     render() {
         return (
@@ -19,5 +21,8 @@ class Logout extends Component {
 }
 
 
-//export default connect(null, actions)(Signout);
-export default Logout;
+const mapDispatchToProps = {
+    signinOut
+};
+  
+export default withRouter(connect(null, mapDispatchToProps)(Logout));
