@@ -6,13 +6,13 @@ export const Types = {
 
 };
 
-export const signinOut = () => {
+export const signinOutAction = () => {
     return {
         type: Types.USER_LOGOUT
     };
 };
 
-export const registerUser = (values, setErrors, history) => {
+export const registerUserAction = (values, setErrors, history) => {
     return {
         type: Types.USER_REGISTER,
         payload: {
@@ -20,12 +20,14 @@ export const registerUser = (values, setErrors, history) => {
             setErrors
         },
         meta: {
-            callbackSuccessAction: () => {history.push('/')}
+            callbackSuccessAction: () => {
+                    history.push('/');
+                }
         }
-    }
-}
+    };
+};
 
-export const signinUser = (credentials, setErrors, history) => {
+export const signinUserAction = (credentials, setErrors, history) => {
     return {
         type: Types.USER_LOGIN,
         payload: {
@@ -33,12 +35,14 @@ export const signinUser = (credentials, setErrors, history) => {
             setErrors
         },
         meta: {
-            callbackSuccessAction: () => {history.push('/')}
+            callbackSuccessAction: () => {
+                history.push('/');
+            }
         }
     };
 };
 
-export const setAuthentification = (isLoggedIn) => {
+export const setAuthentificationAction = (isLoggedIn) => {
     return {
         type: Types.USERS_SET_AUTHENTIFICATION,
         payload: isLoggedIn

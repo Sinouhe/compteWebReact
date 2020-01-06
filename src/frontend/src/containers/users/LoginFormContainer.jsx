@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginForm from '../../form/loginForm/LoginForm';
-import { signinUser } from '../../actions/users';
+import { signinUserAction } from '../../actions/users';
 import { connect } from 'react-redux';
 import { Card } from 'antd';
 import './users.css';
@@ -15,7 +15,7 @@ class LoginFormContainer extends React.Component {
     }
 
     handleSubmit = (credentials, setError) => {
-        this.props.signinUser(credentials, setError, this.props.history);
+        this.props.signinUserAction(credentials, setError, this.props.history);
     }
 
     render() {
@@ -38,7 +38,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    signinUser
+    signinUserAction
 };
   
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer));

@@ -37,9 +37,6 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
 const localOptions = {usernameField : 'email'};
 
 const localLoginStrategy = new localStrategy(localOptions, (email, password, done) => {
-    console.log('email');
-    console.log(email);
-    console.log(password);
     if(!email || !password) {
         console.log(`email or password empty. email: ${email}, password: ${!password ? 'empty' : 'not empty'}`);
         return done(null, false);

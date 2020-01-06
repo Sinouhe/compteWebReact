@@ -1,20 +1,20 @@
 import {takeLatest, call, fork, put} from 'redux-saga/effects';
 import * as actions from '../actions/users';
-import { logInUser, registerUserApi } from '../api/User/users';
+import { logInUserApi, registerUserApi } from '../api/User/users';
 
 function* watchUserLoginRequest(){
-    yield takeLatest(actions.Types.USER_LOGIN, loginUser);
+    yield takeLatest(actions.Types.USER_LOGIN, loginUserSaga);
 }
 
-function* loginUser(action) {
+function* loginUserSaga(action) {
     try{
         const { payload: { credentials }, meta: { callbackSuccessAction } } = action;
-        const result = yield call(logInUser, credentials);
+        const result = yield call(logInUserApi, credentials);
 
         if(result?.data?.status === 'success' && result?.data?.result?.token) {
             localStorage.setItem('tokenBackenAuthent', result.data.result.token);
-            yield put(actions.setAuthentification(true));
-            yield put(callbackSuccessAction());
+            yield put(actions.setAuthentificationAction(true));
+            yield call(callbackSuccessAction);
             
         } else if (result?.data?.status === 'success') {
             throw new Error('no token in the response from the back end for this user');
@@ -23,10 +23,9 @@ function* loginUser(action) {
         }
         
     }catch(err){
-        if (err?.response?.status === 401) {
-            action.payload.setErrors({errorsLogin: 'bad credentials'});
-           }
-        action.payload.setErrors({errorsLogin: `An error occured when trying to log the user, ${err.message}`});
+        err?.response?.status === 401 ?
+            action.payload.setErrors({errorsLogin: 'bad credentials'}) :
+            action.payload.setErrors({errorsLogin: `An error occured when trying to log the user, ${err.message}`});
     }
 }
 
@@ -37,7 +36,7 @@ function* watchUserLogoutRequest(){
 function* logoutUser() {
     try{
         localStorage.removeItem('tokenBackenAuthent');
-        yield put(actions.setAuthentification(false));
+        yield put(actions.setAuthentificationAction(false));
         
     }catch(err){
         console.log(`An error occured when trying to log the user, ${err.message}`);
@@ -51,17 +50,13 @@ function* watchUserRegisterRequest(){
 function* registerUserSaga(action) {
     try {
         const { payload: { values }, meta: { callbackSuccessAction } } = action;
-        
-        yield put(callbackSuccessAction());
-        /*
         const result = yield call(registerUserApi, values);
-
         if(result?.data?.status === 'success') {
-            yield put(callbackSuccessAction());   
+            yield call(callbackSuccessAction);   
         } else {
             action.payload.setErrors({errorsRegister: result.data.message});
         }
-        */
+        
     }catch(err){
         action.payload.setErrors({errorsRegister: `An error occured when trying to log the user, ${err.message}`});
     }

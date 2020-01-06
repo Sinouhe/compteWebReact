@@ -1,6 +1,6 @@
 import React from 'react';
 import RegisterFrom from '../../form/registerForm/RegisterForm';
-import { registerUser } from '../../actions/users';
+import { registerUserAction } from '../../actions/users';
 import { connect } from 'react-redux';
 import { Card } from 'antd';
 import './users.css';
@@ -15,8 +15,7 @@ class RegisterForm extends React.Component {
     }
 
     handleSubmit = (values, setError) => {
-        console.log(values);
-        this.props.registerUser(values, setError, this.props.history);
+        this.props.registerUserAction(values, setError, this.props.history);
     }
 
     render() {
@@ -39,7 +38,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    registerUser
+    registerUserAction
 };
   
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterForm));

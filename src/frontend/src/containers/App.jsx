@@ -5,9 +5,9 @@ import Logout from './users/Logout';
 import { Route, Switch } from 'react-router-dom';
 import Navbar from './menu/mainMenu/index';
 import './menu/mainMenu/mainMenu.css';
-import Home from '../component/home/Home';
+import Home from './home/Home';
 import { connect } from 'react-redux';
-import { setAuthentification } from '../actions/users';
+import { setAuthentificationAction } from '../actions/users';
 
 
 
@@ -15,7 +15,7 @@ class App extends React.Component {
 
   componentDidMount() {
     if (localStorage.getItem('tokenBackenAuthent')  && this.props.isLoggedIn === false) {
-      this.props.setAuthentification(true);
+      this.props.setAuthentificationAction(true);
     }
   }
 
@@ -42,7 +42,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  setAuthentification
+  setAuthentificationAction
 };
 
 export default connect(

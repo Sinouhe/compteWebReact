@@ -1,7 +1,7 @@
 import confApi from '../confApi';
 import { serviceAxiosBackend } from '../service/serviceAxiosBackend';
 
-const logInUser = (credentials) => {
+const logInUserApi = (credentials) => {
     const url = confApi.endPoint + confApi.logUser; 
     return serviceAxiosBackend().post(url,credentials);
 };
@@ -11,4 +11,4 @@ const registerUserApi = (values) => {
     return serviceAxiosBackend().post(url,values);
 };
 
-export {logInUser, registerUserApi};
+export {logInUserApi, registerUserApi};
