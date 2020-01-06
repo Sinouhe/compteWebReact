@@ -1,4 +1,4 @@
-import UsersSagas from './users';
+import UsersSagas from '../../userFeature/sagasServices/users';
 import {all} from 'redux-saga/effects';
 
 

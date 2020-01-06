@@ -3,7 +3,6 @@ import RegisterFrom from '../../form/registerForm/RegisterForm';
 import { registerUserAction } from '../../actions/users';
 import { connect } from 'react-redux';
 import { Card } from 'antd';
-import './users.css';
 import { withRouter } from 'react-router-dom';
 
 class RegisterForm extends React.Component {

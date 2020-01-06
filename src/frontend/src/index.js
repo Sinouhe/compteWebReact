@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '@babel/polyfill';
 import * as serviceWorker from './serviceWorker';
-import App from './containers/App';
-import reducers from './reducers';
+import App from './App';
+import reducers from './commons/reducers/index';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas';
+import rootSaga from './commons/sagaServices/index';
 import { BrowserRouter } from 'react-router-dom';
 
 const sagaMiddleware = createSagaMiddleware();

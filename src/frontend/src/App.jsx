@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
-import LoginFormContainer from './users/LoginFormContainer';
-import RegisterFromContainer from './users/RegisterFormContainer';
-import Logout from './users/Logout';
+import LoginFormContainer from './userFeature/pages/loginPage/LoginFormContainer';
+import RegisterFromContainer from './userFeature/pages/RegisterPage/RegisterFormContainer';
+import Logout from './userFeature/pages/logoutPage/Logout';
 import { Route, Switch } from 'react-router-dom';
-import Navbar from './menu/mainMenu/index';
-import './menu/mainMenu/mainMenu.css';
-import Home from './home/Home';
+import Navbar from './commons/mainMenu/index';
+import './commons/mainMenu/mainMenu.css';
+import Home from './userFeature/pages/homePage/Home';
 import { connect } from 'react-redux';
-import { setAuthentificationAction } from '../actions/users';
+import { setAuthentificationAction } from './userFeature/actions/users';
+import './app.css';
 
 
 

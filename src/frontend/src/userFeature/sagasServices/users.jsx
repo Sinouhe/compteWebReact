@@ -1,6 +1,6 @@
 import {takeLatest, call, fork, put} from 'redux-saga/effects';
 import * as actions from '../actions/users';
-import { logInUserApi, registerUserApi } from '../api/User/users';
+import { logInUserApi, registerUserApi } from '../../commons/api/User/users';
 
 function* watchUserLoginRequest(){
     yield takeLatest(actions.Types.USER_LOGIN, loginUserSaga);
