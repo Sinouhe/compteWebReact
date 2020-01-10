@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import LoginFormContainer from './userFeature/pages/loginPage/LoginFormContainer';
+import { LoginFormContainerWithRouter } from './userFeature/pages/loginPage/LoginFormContainer';
 import RegisterFromContainer from './userFeature/pages/RegisterPage/RegisterFormContainer';
 import Logout from './userFeature/pages/logoutPage/Logout';
 import { Route, Switch } from 'react-router-dom';
@@ -26,7 +26,7 @@ class App extends React.Component {
         <Navbar/>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/login" component={LoginFormContainer}/>
+          <Route exact path="/login" component={LoginFormContainerWithRouter}/>
           <Route exact path="/logout" component={Logout}/>
           <Route exact path="/register" component={RegisterFromContainer}/>          
         </Switch>
