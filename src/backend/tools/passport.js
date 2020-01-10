@@ -13,7 +13,6 @@ const jwtOptions = {
 };
 
 const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
-    console.log(payload.sub);
     if(!payload?.sub) {
         return done(null, false);
     }

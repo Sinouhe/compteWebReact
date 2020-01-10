@@ -19,6 +19,18 @@ class AbstractSuperClassDAO {
         throw new TypeError('Abstract class "AbstractSuperClassDAO" cannot be instantiated directly');
       }
 
+      if (this.saveOne_DAO_Promise === undefined) {
+        throw new TypeError(`you must implement method saveOne_DAO_Promise due to AbstractSuperClass extends in ${this.constructor}`);
+      }
+
+      if (this.findById_DAO_Promise === undefined) {
+        throw new TypeError(`you must implement method findById_DAO_Promise due to AbstractSuperClass extends in ${this.constructor}`);
+      }
+
+      if (this.deleteOneById_DAO_Promise === undefined) {
+        throw new TypeError(`you must implement method deleteOneById_DAO_Promise due to AbstractSuperClass extends in ${this.constructor}`);
+      }
+
       this.#database = database;
     }
    
@@ -29,6 +41,8 @@ class AbstractSuperClassDAO {
     setDatabase = () => {
         return this.#database;
     }  
+
+    
 }
    
 module.exports = AbstractSuperClassDAO;

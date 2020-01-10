@@ -51,17 +51,16 @@ class User_DAO extends AbstractSuperClassDAO {
                 }                  
                 
                 if(row.length > 0 ) {
-                    user = new User();
-                    this.#loadUserFromRow(row, user);
+                    user = new User(row[0]);
                 }                   
                   
                 resolve(user);
             });
         }); 
-    };
+    }
 
 
-    userFindById_DAO_Promise = (id) => {
+    findById_DAO_Promise(id) {
         let user = undefined;
         let queryString = `SELECT ??
                             FROM ?? 
@@ -77,17 +76,16 @@ class User_DAO extends AbstractSuperClassDAO {
                 }                       
 
                 if(row.length > 0 ) {
-                    user = new User();
-                    this.#loadUserFromRow(row, user);
+                    user = new User(row[0]);
                 }                   
                 
                 resolve(user);
             });
         }); 
-    };
+    }
 
     
-    saveUser_DAO_Promise = (user) => {
+    saveOne_DAO_Promise(user) {
         let queryString = `INSERT INTO ?? (??)
                             values(?, ?, ?, ?)`;
 
@@ -105,6 +103,27 @@ class User_DAO extends AbstractSuperClassDAO {
                                             ( err, row ) => {
                 if ( err ) {
                     return reject( err );
+                }        
+                
+                user.setId(row.insertId);
+                resolve(row);
+            });
+        });
+    }
+    
+    deleteOneByEmail_DAO_Promise = (userEmail) => {
+        let queryString = `DELETE FROM ?? WHERE USER_email = ?`;
+
+        return new Promise( ( resolve, reject ) => {
+            return this.getDatabase().handleQuery(this.getDatabase().getPoolConnection(), 
+                                            queryString, 
+                                            [
+                                                tableName,
+                                                userEmail
+                                            ], 
+                                            ( err, row ) => {
+                if ( err ) {
+                    return reject( err );
                 }                    
 
                 resolve(row);
@@ -112,8 +131,9 @@ class User_DAO extends AbstractSuperClassDAO {
         });
     }
     
-    
-
+    deleteOneById_DAO_Promise(id) {
+        throw new Error(`deleteOneById_DAO_Promise method in ${this.constructor.name} is not defined.`);
+    }
 }
 
 module.exports = User_DAO;

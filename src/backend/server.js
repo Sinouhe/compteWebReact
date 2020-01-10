@@ -12,7 +12,7 @@ process.on('uncaughtException', (err) => {
 	console.error(`WARNING: Uncaught exception. Reason: \n${err.message}\n${err.stack}`);
 });
 
-process.on('exit', function() {
+process.on('close', function() {
     console.log('About to close');
 });
 
@@ -21,15 +21,30 @@ import bodyParser from 'body-parser';
 import config from './config';
 import authRoutes from './routes/authRoutes';
 import Database from './tools/Database';
+import AuthController from './tools/decorators';
+import User from './model/user/User';
+import User_DAO from './model/user/User_DAO';
+
 const helmet = require('helmet'),
     app = express(),
     compression = require('compression');
-
+    
 /*****************************************************
  * Database connection, pass to global for DAO class *
  ****************************************************/
 const dataBase = new Database().createPoolConnection(config.dataBaseConnectionLimit);
 global.database = dataBase;
+
+const user = new User({USER_nom: 'fouqueau',
+USER_prenom :'sinouhe',
+USER_email : 'absolom2001@hotmail.com',
+USER_password : '1234'});
+
+const user_DAO = new User_DAO();
+user_DAO.getUserByEmail_DAO_Promise('absolom2001@hotmail.com')
+.then(user => console.log(user.objectToJson()));
+
+
 
 /**************
  * MiddleWare *
@@ -68,4 +83,5 @@ app.listen(config.port, () => {
     console.log(`mode: ${process.env.NODE_ENV}`);
     console.log(`listening on port: ${config.port}`);
 });
+
 

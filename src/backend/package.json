@@ -23,11 +23,14 @@
     "passport-local": "=1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "=7.7.7",
+    "@babel/core": "^7.7.7",
     "@babel/node": "=7.7.7",
     "@babel/plugin-proposal-class-properties": "=7.7.4",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
     "@babel/plugin-proposal-optional-chaining": "=7.7.5",
     "@babel/preset-env": "=7.7.7",
+    "@babel/register": "^7.7.7",
+    "babel-polyfill": "^6.26.0",
     "nodemon": "=2.0.2",
     "progress-bar-webpack-plugin": "^1.12.1"
   }

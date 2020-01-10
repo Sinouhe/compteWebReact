@@ -12,43 +12,44 @@ class User extends AbstractSuperClass {
     
     #passwordSaltRound = 10;
 
-    #id = undefined;
-    #nom;
-    #prenom;
-    #email;
-    #password;
+    #USER_id = undefined;
+    #USER_nom;
+    #USER_prenom;
+    #USER_email;
+    #USER_password;
 
-    constructor({nom, prenom, email, password} = {}) {
+    constructor(userTocreate = {}) {
         super();
-        nom ? this.#nom = nom : this.#nom = '';
-        prenom ? this.#prenom = prenom : this.#prenom = '';
-        email ? this.#email = email : this.#email = '';
-        password ? this.#password = password : this.#password = '';
+        this.#USER_id = userTocreate.USER_id;
+        this.#USER_nom = userTocreate.USER_nom;
+        this.#USER_prenom = userTocreate.USER_prenom;
+        this.#USER_email = userTocreate.USER_email;
+        this.#USER_password = userTocreate.USER_password;
         return this;
     }
 
     setId = (id) => {
-        this.#id = id;
+        this.#USER_id = id;
         return this;
     }
 
     setNom = (nom) => {
-        this.#nom = nom;
+        this.#USER_nom = nom;
         return this;
     }
 
     setPrenom = (prenom) => {
-        this.#prenom = prenom;
+        this.#USER_prenom = prenom;
         return this;
     }
 
     setEmail = (email) => {
-        this.#email = email;
+        this.#USER_email = email;
         return this;
     }
 
     setPassword = (password) => {
-        this.#password = password;
+        this.#USER_password = password;
         return this;
     }
 
@@ -58,19 +59,19 @@ class User extends AbstractSuperClass {
     }
 
     getNom = () => {
-        return this.#nom;
+        return this.#USER_nom;
     }
 
     getPrenom = () => {
-        return this.#prenom;
+        return this.#USER_prenom;
     }
 
     getEmail = () => {
-        return this.#email;
+        return this.#USER_email;
     }
 
     getPassword = () => {
-        return this.#password;
+        return this.#USER_password;
     }
 
     getPasswordSaltRound = () => {
@@ -78,7 +79,7 @@ class User extends AbstractSuperClass {
     }
 
     getId = () => {
-        return this.#id;
+        return this.#USER_id;
     }
 
     cryptPassword = () => {
