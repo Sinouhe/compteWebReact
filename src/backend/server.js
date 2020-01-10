@@ -21,9 +21,6 @@ import bodyParser from 'body-parser';
 import config from './config';
 import authRoutes from './routes/authRoutes';
 import Database from './tools/Database';
-import AuthController from './tools/decorators';
-import User from './model/user/User';
-import User_DAO from './model/user/User_DAO';
 
 const helmet = require('helmet'),
     app = express(),
@@ -34,17 +31,6 @@ const helmet = require('helmet'),
  ****************************************************/
 const dataBase = new Database().createPoolConnection(config.dataBaseConnectionLimit);
 global.database = dataBase;
-
-const user = new User({USER_nom: 'fouqueau',
-USER_prenom :'sinouhe',
-USER_email : 'absolom2001@hotmail.com',
-USER_password : '1234'});
-
-const user_DAO = new User_DAO();
-user_DAO.getUserByEmail_DAO_Promise('absolom2001@hotmail.com')
-.then(user => console.log(user.objectToJson()));
-
-
 
 /**************
  * MiddleWare *
