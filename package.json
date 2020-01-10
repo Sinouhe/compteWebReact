@@ -3,6 +3,7 @@
     "hooks": {
       "pre-commit": ""
     }
+    
   },
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
