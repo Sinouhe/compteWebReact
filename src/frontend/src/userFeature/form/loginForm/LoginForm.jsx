@@ -68,7 +68,7 @@ class LoginForm extends React.Component {
                                         {errors.password && touched.password ? <div style={{color: 'red'}}>*{errors.password}</div> : null}
                                     </Form.Item>         
                                     <Form.Item>
-                                    <Button type="primary" htmlType="submit" className="login-form-button">
+                                    <Button type="primary" htmlType="submit" className="login-form-button" id="loginFormSubmitButton">
                                         Log in
                                     </Button>
                                     { errors.errorsLogin && <div style={{color: 'red'}}>*{errors.errorsLogin}</div> }

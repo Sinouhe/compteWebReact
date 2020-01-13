@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`My Connected React-Redux Component should render with given state from Redux store 1`] = `
+<Card
+  className="card-login-form"
+  style={
+    Object {
+      "borderRadius": 8,
+      "marginLeft": "6%",
+      "top": 20,
+    }
+  }
+  title="Login"
+>
+  <div>
+    salut
+  </div>
+  <LoginForm
+    handleSubmitParent={[Function]}
+  />
+</Card>
+`;

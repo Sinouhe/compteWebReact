@@ -5,7 +5,7 @@ import Logout from './userFeature/pages/logoutPage/Logout';
 import { Route, Switch } from 'react-router-dom';
 import Navbar from './commons/mainMenu/index';
 import './commons/mainMenu/mainMenu.css';
-import Home from './userFeature/pages/homePage/Home';
+import GamesHomePage from './gameFeature/pages/homePage/Home';
 import { connect } from 'react-redux';
 import { setAuthentificationAction } from './userFeature/actions/users';
 import './app.css';
@@ -25,7 +25,7 @@ class App extends React.Component {
       <Fragment>
         <Navbar/>
         <Switch>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" component={GamesHomePage}/>
           <Route exact path="/login" component={LoginFormContainerWithRouter}/>
           <Route exact path="/logout" component={Logout}/>
           <Route exact path="/register" component={RegisterFromContainer}/>          

@@ -14,19 +14,17 @@ class LoginFormContainer extends React.Component {
     }
 
     handleSubmit = (credentials, setError) => {
-        console.log('handle submit');
         this.props.signinUserAction(credentials, setError, this.props.history);
     }
 
     render() {
-        //to test decorators
-        //this.add(1, 2);
         return ( 
             <Card title="Login" style={{ 
                                         borderRadius: 8, 
                                         marginLeft: '6%', 
                                         top: 20
                                         }} className='card-login-form'>
+                                            <div>salut</div>
                 <LoginForm handleSubmitParent={this.handleSubmit}/>
             </Card>
         );
@@ -34,6 +32,7 @@ class LoginFormContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state)
     return {
       isLoggedIn: state.users.isLoggedIn
     };
@@ -44,9 +43,10 @@ const mapDispatchToProps = {
 };
   
 const LoginFormContainerWithRouter = withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer));
-const LoginFormContainerTest = connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer);
+const LoginFormContainerConnected = connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer);
 
 export {
     LoginFormContainerWithRouter,
-    LoginFormContainerTest
-}
+    LoginFormContainerConnected,
+    LoginFormContainer
+};

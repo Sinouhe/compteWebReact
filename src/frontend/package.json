@@ -18,7 +18,8 @@
     "dev": "webpack-dev-server --config webpack.dev.config.front.js --hot",
     "build:prod": "webpack --config webpack.prod.config.front.js",
     "publish:npm": "rm -rf dist && mkdir dist &&  babel src -d module --copy-files",
-    "test": "react-scripts test --env=jsdom"
+    "test": "react-scripts test --env=jsdom",
+    "jestUpd": "jest --updateSnapshot"
   },
   "devDependencies": {
     "@babel/cli": "=7.7.7",
@@ -34,6 +35,7 @@
     "css-loader": "=3.4.0",
     "enzyme": "=3.11.0",
     "enzyme-adapter-react-16": "=1.15.2",
+    "enzyme-to-json": "^3.4.3",
     "html-webpack-plugin": "=3.2.0",
     "jest": "=24.9.0",
     "mini-css-extract-plugin": "=0.9.0",
